@@ -48,24 +48,10 @@
                     MessageLabel.Text += "<br /> Blocked Categories: " + String.Join(", ", categories);
                 }
                 break;
-                
+
             // Phishing Domains
             case "phish":
                 MessageLabel.Text = "is believed to be involved in a phishing attack";
-                break;
-                
-            // Typo Correction / SERVFAIL / NXDOMAIN
-            case "nav":
-                if (Request.QueryString["spell"] != null)
-                {
-                    // if we have a spelling correction, you can simply redirect the user there
-                    Response.Redirect(Request.QueryString["spell"]);
-                    return;
-                }
-                else
-                {
-                    MessageLabel.Text = "is not a valid domain or is not working at this time.";
-                }
                 break;
 
             default:

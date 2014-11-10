@@ -52,20 +52,7 @@ $(function() {
         case "phish":
             $("#message").text("is believed to be involved in a phishing attack.");
             break;
-         
-         // Typo Correction / SERVFAIL / NXDOMAIN
-        case "nav":
-            if ($.url.param("spell")) {
-                // if we have a spelling correction, you can simply redirect the user there
-                var url = unescape($.url.param("spell"));
-                $("body").html("Redirecting you to <a href='" + url + "'>" + url + "</a>.");
-                window.location = url;
-            }
-            else {
-                $("#message").text("is not a valid domain or is not working at this time.");
-            }
-            break;
-            
+
         default:
             // You should probably log anything like this as it means people are either
             // playing with your block page or OpenDNS added an additional type and you

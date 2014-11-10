@@ -29,20 +29,7 @@ switch ($_REQUEST['type']) {
     case 'phish':
         $message = 'is believed to be involved in a phishing attack.';
     break;
-    
-    // Typo Correction / SERVFAIL / NXDOMAIN
-    case 'nav':
-        // Do we have a typo correction?
-        if (isset($_REQUEST['spell'])) {
-            // if we have a spelling correction, you can simply redirect the user there
-            header("Location: {$_REQUEST['spell']}");
-            exit;
-        }
-        else {
-            $message = 'is not a valid domain or is not working at this time.';
-        }
-    break;
-    
+
     default:
         // You should probably log anything like this as it means people are either
         // playing with your block page or OpenDNS added an additional type and you
