@@ -8,19 +8,40 @@
 <!-- These should be stored on your local server and not grabbed remotely like -->
 <!-- this.  Download the scripts and place on your block page server or risk   -->
 <!-- these guys banning your IPs.  Your call.                                  -->
-<script src="http://plugins.jquery.com/files/rotator.js.txt"></script>
 <script src="https://raw.github.com/allmarkedup/jQuery-URL-Parser/v1.1/jquery.url.js"></script>
 
 <script language="Javascript">
 // It is very important to unescape the information in the query parameters as they will
 // be URL encoded.  unescape lends consistent results for the purposes of this exercise
 
+/* Rot13 implementation to decode domain data */
+function rot13(str) {
+    var decoded = '';
+    for (n in str) {
+        var char = str[n]
+        if (!/[A-Z]/i.match(char)) {
+            decoded += char
+        }
+        else {
+            var charCode = str.charCodeAt(n)
+            if (charCode < 97) {
+                charChode = (charCode - 52) % 26 + 65
+            }
+            else {
+                charCode = (charCode - 84) % 26 + 97
+            }
+            decoded += String.fromCharCode(charCode)
+        }
+    }
+    return decoded
+}
+
 $(function() {
     // Get the domain query parameter, use example.com if we don't have one.
     var domain = $.url.param("url");
     if (domain) {
-        domain = $.rotate13(unescape(domain));
-        
+        domain = rot13(unescape(domain));
+
         // Since the decisions are made only on the domain, let's *just* show the domain.
         domain = /[a-z]+:\/\/([^\/]+)\//i.exec(domain)[1];
     }
