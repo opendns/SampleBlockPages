@@ -4,11 +4,8 @@
 <!-- We are going to use JQuery to make life a little easier, this can be done -->
 <!-- without it, but then it's not so easy, or fun.  Use whatever library you  -->
 <!-- are comfortable with.                                                     -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
-<!-- These should be stored on your local server and not grabbed remotely like -->
-<!-- this.  Download the scripts and place on your block page server or risk   -->
-<!-- these guys banning your IPs.  Your call.                                  -->
-<script src="https://raw.github.com/allmarkedup/jQuery-URL-Parser/v1.1/jquery.url.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/purl/2.3.1/purl.min.js"></script>
 
 <script language="Javascript">
 // It is very important to unescape the information in the query parameters as they will
@@ -38,7 +35,7 @@ function rot13(str) {
 
 $(function() {
     // Get the domain query parameter, use example.com if we don't have one.
-    var domain = $.url.param("url");
+    var domain = $.url().param("url");
     if (domain) {
         domain = rot13(unescape(domain));
 
@@ -53,7 +50,7 @@ $(function() {
     
     // Set a default type to "block".  This allows us to just referance the block page
     // and see an example of what it would look like without needing extra parameters
-    var type = $.url.param("type");
+    var type = $.url().param("type");
     if (!type)
         type = "block";
     
@@ -63,9 +60,9 @@ $(function() {
         case "ablock":
         case "block":
             $("#message").text("was blocked on this network.");
-            if ($.url.param("cats")) {
+            if ($.url().param("cats")) {
                 // categories are an escaped JSON array
-                $("#message").append("<br />Blocked Categories: " + $.parseJSON(unescape($.url.param("cats"))).join(", "));
+                $("#message").append("<br />Blocked Categories: " + $.parseJSON(unescape($.url().param("cats"))).join(", "));
             }
             break;
             
