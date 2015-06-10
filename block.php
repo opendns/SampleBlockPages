@@ -3,9 +3,9 @@
 if (!isset($_REQUEST['url']))
     $domain = 'www.example.com';
 else {
-    // Since the decisions are made only on the domain, let's *just* show the domain.
-    preg_match('#[a-z]+://([^/]+)/#i', str_rot13($_REQUEST['url']), $domain);
-    $domain = $domain[1];
+    // Since the decisions are made only on the domain, and http:// is no longer passed in the request, the domain is the url query.
+    $domain = str_rot13($_REQUEST['url']);
+    
 }
 
 // Set a default type to "block".  This allows us to just referance the block page

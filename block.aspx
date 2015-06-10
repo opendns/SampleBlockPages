@@ -16,9 +16,10 @@
         // Get the domain query parameter, use example.com if we don't have one.
         if (Request.QueryString["url"] != null)
         {
-            // Since the decisions are made only on the domain, let's *just* show the domain.
-            Match m = Regex.Match(Rot13.Transform(Request.QueryString["url"]), "[a-z]+://([^/]+)/", RegexOptions.IgnoreCase);
-            DomainLabel.Text = m.Groups[1].ToString();
+            // Since only the domain (no http) is returned from the landers, this is the domain label to print
+             DomainLabel.Text = Rot13.Transform(Request.QueryString["url"]);
+             
+
         }
         else
         {
